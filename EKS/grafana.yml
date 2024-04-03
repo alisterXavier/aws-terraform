@@ -1,0 +1,15 @@
+persistence:
+  storageClassName: "gp2"
+  enabled: true
+adminPassword: EKS123456
+service:
+  type: LoadBalancer
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://prometheus-server.prometheus.svc.cluster.local
+        access: proxy
+        isDefault: true
