@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    environment {
+        DOCKERHUB_IMAGE_NAME = 'alisterxavier153/pao'
+    }
+
+    stages {
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Build Docker Image') {
+            steps {
+                app = docker.build('/jenkins-eks/')
+            }
+        }
+        stage('Push Docker Image') {
+            when {
+                branch 'main'
+            }
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker') {
+                        app.push("${env.BUILD_NUMBER}")
+                        app.push('latest')
+                    }
+                }
+            }
+        }
+    }
+}
