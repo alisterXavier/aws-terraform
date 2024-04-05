@@ -12,7 +12,6 @@ pipeline {
     }
     stage('Build Docker Image') {
       steps {
-        // Fix: The docker.build method takes the path to the Dockerfile as a string
         sh 'docker build -t $DOCKERHUB_IMAGE_NAME .'  // Assuming Dockerfile is in the workspace root
       }
     }
@@ -23,7 +22,6 @@ pipeline {
       steps {
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker') {
-            // Push with build number and 'latest' tag
             docker.push("${env.BUILD_NUMBER}")
             docker.push('latest')
           }
@@ -32,3 +30,5 @@ pipeline {
     }
   }
 }
+
+// Remove the extra closing curly brace if it exists at the end of the file.
