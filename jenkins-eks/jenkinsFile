@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKERHUB_IMAGE_NAME = 'alisterxavier153/pao'
+        DOCKERHUB_IMAGE_NAME = 'alisterxavier153/jenkins-test'
     }
 
     stages {
@@ -23,7 +23,6 @@ pipeline {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker') {
                         docker.push("${env.BUILD_NUMBER}")
-                        docker.push('latest')
                     }
                 }
             }
