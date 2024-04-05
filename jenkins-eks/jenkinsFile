@@ -1,34 +1,34 @@
 pipeline {
-  agent any
-  environment {
-    DOCKERHUB_IMAGE_NAME = 'alisterxavier153/pao'
-  }
+    agent any
+    environment {
+        DOCKERHUB_IMAGE_NAME = 'alisterxavier153/pao'
+    }
 
-  stages {
-    stage('Test') {
-      steps {
-        echo 'Testing..'
-      }
-    }
-    stage('Build Docker Image') {
-      steps {
-        sh 'docker build -t $DOCKERHUB_IMAGE_NAME .'  // Assuming Dockerfile is in the workspace root
-      }
-    }
-    stage('Push Docker Image') {
-      when {
-        branch 'main'
-      }
-      steps {
-        script {
-          docker.withRegistry('https://registry.hub.docker.com', 'docker') {
-            docker.push("${env.BUILD_NUMBER}")
-            docker.push('latest')
-          }
+    stages {
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
         }
-      }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t $DOCKERHUB_IMAGE_NAME .'  // Assuming Dockerfile is in the workspace root
+            }
+        }
+        stage('Push Docker Image') {
+            when {
+                branch 'main'
+            }
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'docker') {
+                        docker.push("${env.BUILD_NUMBER}")
+                        docker.push('latest')
+                    }
+                }
+            }
+        }
     }
-  }
 }
 
 // Remove the extra closing curly brace if it exists at the end of the file.
