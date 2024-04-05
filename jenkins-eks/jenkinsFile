@@ -1,32 +1,34 @@
 pipeline {
-    agent any
-    environment {
-        DOCKERHUB_IMAGE_NAME = 'alisterxavier153/pao'
-    }
+  agent any
+  environment {
+    DOCKERHUB_IMAGE_NAME = 'alisterxavier153/pao'
+  }
 
-    stages {
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Build Docker Image') {
-            steps {
-                app = docker.build('/jenkins-eks/')
-            }
-        }
-        stage('Push Docker Image') {
-            when {
-                branch 'main'
-            }
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker') {
-                        app.push("${env.BUILD_NUMBER}")
-                        app.push('latest')
-                    }
-                }
-            }
-        }
+  stages {
+    stage('Test') {
+      steps {
+        echo 'Testing..'
+      }
     }
+    stage('Build Docker Image') {
+      steps {
+        // Fix: The docker.build method takes the path to the Dockerfile as a string
+        sh 'docker build -t $DOCKERHUB_IMAGE_NAME .'  // Assuming Dockerfile is in the workspace root
+      }
+    }
+    stage('Push Docker Image') {
+      when {
+        branch 'main'
+      }
+      steps {
+        script {
+          docker.withRegistry('https://registry.hub.docker.com', 'docker') {
+            // Push with build number and 'latest' tag
+            docker.push("${env.BUILD_NUMBER}")
+            docker.push('latest')
+          }
+        }
+      }
+    }
+  }
 }
