@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKERHUB_IMAGE_NAME .'  // Assuming Dockerfile is in the workspace root
+                sh 'docker build -t $DOCKERHUB_IMAGE_NAME ./jenkins-eks/'  // Assuming Dockerfile is in the workspace root
             }
         }
         stage('Push Docker Image') {
