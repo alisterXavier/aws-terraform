@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    def app
     environment {
         DOCKERHUB_IMAGE_NAME = 'alisterxavier153/jenkins-test'
     }
@@ -13,7 +14,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build(DOCKERHUB_IMAGE_NAME)
+                    app = docker.build(DOCKERHUB_IMAGE_NAME)
                 }
                 echo 'Testijjjng..'
             }
@@ -25,7 +26,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'docker') {
-                        docker.push("${env.BUILD_NUMBER}")
+                        app.push("${env.BUILD_NUMBER}")
                     }
                 }
             }
