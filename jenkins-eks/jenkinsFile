@@ -5,7 +5,7 @@ pipeline {
         nodejs '21.7'
     }
     environment {
-        DOCKERHUB_IMAGE_NAME = 'alisterxavir153/jenkins-test'
+        DOCKERHUB_IMAGE_NAME = 'alisterxavier153/jenkins-test'
     }
 
     stages {
