@@ -12,7 +12,9 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                docker.build(DOCKERHUB_IMAGE_NAME)
+                script {
+                    docker.build(DOCKERHUB_IMAGE_NAME)
+                }
                 echo 'Testijjjng..'
             }
         }
