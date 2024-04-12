@@ -3,4 +3,5 @@
 .terraform.tfstate
 .terraform.tfstate.backup
 /aws
-node_modules
+node_modules/
+dist/
