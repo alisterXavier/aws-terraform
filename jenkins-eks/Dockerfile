@@ -1,4 +1,4 @@
-FROM ubuntu:latest AS BUILD
+FROM node:16-alpine AS BUILD
 
 WORKDIR /app
 
