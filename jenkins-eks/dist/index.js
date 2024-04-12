@@ -22176,10 +22176,10 @@ var express = require_express2();
 var app = express();
 var port = 3e3;
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.json({ message: true });
 });
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Listening on port ${port}`);
 });
 /*! Bundled license information:
 

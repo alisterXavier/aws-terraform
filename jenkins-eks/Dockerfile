@@ -5,7 +5,7 @@ WORKDIR /app
 COPY ./ /app/
 
 RUN npm install
-RUN npm run build
+RUN npm run docker-build
 
 FROM node:16-alpine AS PRODUCTION
 
