@@ -1,6 +1,6 @@
+def app
 pipeline {
     agent any
-    def app
     environment {
         DOCKERHUB_IMAGE_NAME = 'alisterxavier153/jenkins-test'
     }
