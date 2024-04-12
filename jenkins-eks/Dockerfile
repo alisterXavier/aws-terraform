@@ -3,9 +3,12 @@ FROM node:16-alpine AS BUILD
 WORKDIR /app
 
 COPY ./ /app/
-RUN pwd
+
 
 RUN npm install
+
+RUN ls
+
 RUN npm run build
 
 FROM node:16-alpine AS PRODUCTION
