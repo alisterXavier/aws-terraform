@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKERHUB_IMAGE_NAME ./jenkins-eks/'
+                sh 'docker build -t $DOCKERHUB_IMAGE_NAME ./'
                 echo 'Testing..'
             }
         }
