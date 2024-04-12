@@ -12,7 +12,8 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $DOCKERHUB_IMAGE_NAME ./jenkins-eks/'  // Assuming Dockerfile is in the workspace root
+                sh 'docker build -t $DOCKERHUB_IMAGE_NAME ./jenkins-eks/'
+                echo 'Testing..'
             }
         }
         stage('Push Docker Image') {
@@ -29,5 +30,3 @@ pipeline {
         }
     }
 }
-
-// Remove the extra closing curly brace if it exists at the end of the file.
