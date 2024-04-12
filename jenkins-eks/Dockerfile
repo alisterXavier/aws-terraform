@@ -2,10 +2,12 @@ FROM node:16-alpine AS BUILD
 
 WORKDIR /app
 
+COPY ./ /app/
+
 RUN npm install
 RUN npm run build
 
-FROM alpine:latest AS PRODUCTION
+FROM node:16-alpine AS PRODUCTION
 
 WORKDIR /app
 
