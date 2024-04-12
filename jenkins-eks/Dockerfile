@@ -7,7 +7,7 @@ COPY ./ /app/
 
 RUN npm install
 
-RUN ls
+RUN ls /app/node_modules/.bin
 
 RUN npm run build
 
