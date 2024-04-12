@@ -1,6 +1,9 @@
 def app
 pipeline {
     agent any
+    tools {
+        nodejs '21.7'
+    }
     environment {
         DOCKERHUB_IMAGE_NAME = 'alisterxavier153/jenkins-test'
     }
@@ -14,7 +17,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    app = docker.build(DOCKERHUB_IMAGE_NAME, "./jenkins-eks/")
+                    app = docker.build(DOCKERHUB_IMAGE_NAME, './jenkins-eks/')
                 }
                 echo 'Testijjjng..'
             }
