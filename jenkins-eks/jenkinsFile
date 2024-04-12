@@ -14,7 +14,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    app = docker.build(DOCKERHUB_IMAGE_NAME)
+                    app = docker.build(DOCKERHUB_IMAGE_NAME, "./jenkins-eks/")
                 }
                 echo 'Testijjjng..'
             }
