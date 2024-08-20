@@ -1,3 +1,5 @@
+// helm install grafana stable/grafana -f values.yaml
+
 persistence:
   storageClassName: "gp2"
   enabled: true
